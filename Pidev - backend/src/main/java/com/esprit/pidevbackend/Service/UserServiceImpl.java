@@ -3,10 +3,12 @@ package com.esprit.pidevbackend.Service;
 import com.esprit.pidevbackend.Domain.Role;
 import com.esprit.pidevbackend.Domain.User;
 import com.esprit.pidevbackend.Exception.UserFoundException;
+
 import com.esprit.pidevbackend.Repository.RoleRepository;
 import com.esprit.pidevbackend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,16 +26,19 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService , UserDetailsService {
-
-    private final UserRepository userRepository ;
-    private final RoleRepository roleRepository ;
-    private final PasswordEncoder passwordEncoder ;
+    @Autowired
+    private UserRepository userRepository ;
+    @Autowired
+    private RoleRepository roleRepository ;
+    @Autowired
+    private PasswordEncoder passwordEncoder ;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user == null){
+
             log.error("User not found in database");
             throw  new UsernameNotFoundException("user not found in database");
         }
