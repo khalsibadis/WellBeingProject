@@ -1,5 +1,6 @@
 package com.esprit.pidevbackend.Service;
 
+import com.esprit.pidevbackend.Domain.Collaboration;
 import com.esprit.pidevbackend.Domain.Happy;
 import com.esprit.pidevbackend.Domain.Offer;
 import com.esprit.pidevbackend.Repository.ICollaboration;
@@ -8,12 +9,15 @@ import com.esprit.pidevbackend.Repository.IPublicity;
 import com.esprit.pidevbackend.ServiceImp.IOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
-
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static com.esprit.pidevbackend.Domain.Happy.BLACK_FRIDAY;
 
 @Service
 public class OfferService implements IOfferService {
@@ -29,13 +33,15 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<Offer> retrieveAllOffers() {
-		List<Offer> offers = (List<Offer>)  OfferRepo.findAll();
+		List<Offer> offers = (List<Offer>) OfferRepo.findAll();
 		return offers;
 	}
 
 	@Override
-	public void addOffer(Offer o) {
-		 OfferRepo.save(o);
+	public void addOffer(Offer o, long idCollaboration) {
+		Collaboration collaboration = CollaborationRepo.findById(idCollaboration).get();
+		o.setCollaboration(collaboration);
+		OfferRepo.save(o);
 	}
 
 	@Override
@@ -50,57 +56,28 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public Offer retrieveOffer(Long id) {
-		return 	OfferRepo.findById(id).orElse(null);
+		return OfferRepo.findById(id).orElse(null);
 
 	}
 
-	@Override
-	public void dateOffer(long idOffer, Date starDate, Date finDate) {
-		Offer  offer = OfferRepo.findById(idOffer).orElse(null);
-		Date date =new Date();
-		if(date == starDate) {
-			OfferRepo.findById(idOffer).orElse(null);
-		}else if (date == finDate){
-			OfferRepo.deleteById(idOffer);
-		}
-	}
-
-	
-	
-	public Optional<Offer> findByIdOffer(int id) {
-		return OfferRepo.findByIdOffer(id);
-	}
-	public List<Offer> findAllByLocalisation(String localisation) {
-		return (List<Offer>)  OfferRepo.findAllByLocalisation(localisation);
-	}
-
-	List<Offer> findAllByStarDate(Date starDate){
-		return (List<Offer>) OfferRepo.findAllByStarDate(starDate);
-	}
-	List<Offer> findAllByDescrption(String description){
-		return (List<Offer>) OfferRepo.findAllByDescrption(description);
-	}
-	List<Offer> findAllByCollaborationRate(String rate){
-		return (List<Offer>) OfferRepo.findAllByCollaborationRate(rate);
-	}
 
 	@Override
-	public float calculProm(long idOffer, float promotion) {
-		Offer offer = OfferRepo.findById(idOffer).orElse(null);
-		Offer o =new Offer();
-		Date date = new Date();
-		float p=0;
-		if(date.equals(Happy.BLACK_FRIDAY)) {
-			promotion = (p*50) / 100;
-		}else if(date.equals(Happy.HAPPY_DAYS)) {
-			promotion = (p*20)/100;
-		}else if (date.equals(Happy.HAPPY_HOUR)) {
-			promotion = (p*20)/100;
-		}else {
-		   promotion = (o.getPercentage()/100) * p; 	
-		}	
-		OfferRepo.save(offer);
-		return promotion;
+	@Transactional
+	public float calculProm(long idOffer) {
+		Offer o = OfferRepo.findById(idOffer).orElse(null);
+
+			if (o.getHappy() == Happy.BLACK_FRIDAY) {
+				o.setPromotion((o.getPrix() * 50) / 100);
+			} else if (o.getHappy() == Happy.HAPPY_DAYS) {
+				o.setPromotion((o.getPrix() * 20) / 100);
+			} else if (o.getHappy() == Happy.HAPPY_HOUR) {
+				o.setPromotion((o.getPrix() * 20) / 100);
+			} else if(o.getHappy() == Happy.PROMOTION) {
+				o.setPromotion((o.getPercentage() * o.getPrix()) / 100);
+			}
+			OfferRepo.save(o);
+			return o.getPromotion();
 	}
 }
+
 

@@ -3,6 +3,7 @@ package com.esprit.pidevbackend.Controller;
 import com.esprit.pidevbackend.Domain.Offer;
 import com.esprit.pidevbackend.ServiceImp.IOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,10 +18,10 @@ public class OfferController {
     IOfferService offerService;
 
     //http://localhost:8080/addOffer
-    @PostMapping("/addOffer")
+    @PostMapping("/addOffer/{idCollaboration}")
     @ResponseBody
-    public void addOffer(@RequestBody Offer o){
-        offerService.addOffer(o);
+    public void addOffer(@RequestBody Offer o,@PathVariable long idCollaboration){
+        offerService.addOffer(o,idCollaboration);
     }
 
     //http://localhost:8080/deleteOffer/id
@@ -51,11 +52,10 @@ public class OfferController {
         return offerService.retrieveOffer(id);
     }
 
-    //http://localhost:8080/Offer/dateOffer/idOffer/starDate/finDate
-    @GetMapping("/Offer/dateOffer/{idOffer}/{starDate}/{finDate}")
+    @PostMapping("/calculPromotion/{idOffer}")
     @ResponseBody
-    public void dateOffer(@PathVariable long idOffer, @PathVariable Date starDate, @PathVariable Date finDate){
-        offerService.dateOffer(idOffer,starDate,finDate);
+    public float calculPromotion (@PathVariable long idOffer){
+       return offerService.calculProm(idOffer);
     }
 
 

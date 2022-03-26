@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@ToString
+
 public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,12 +29,13 @@ public class Offer implements Serializable {
 	long  idOffer;
 	String title;
 	String descrption;
-	Date starDate;
-	Date endDate;
-	int NPlaces;
+	Date starDateOf;
+	Date endDateOf;
+	int nplaces;
 	float promotion;
 	int percentage;
 	String localisation;
+	float prix;
 
 	
 	@Enumerated(EnumType.STRING)

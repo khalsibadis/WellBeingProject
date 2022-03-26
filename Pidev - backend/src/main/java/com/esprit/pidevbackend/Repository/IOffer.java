@@ -14,8 +14,5 @@ import java.util.Optional;
 public interface IOffer extends JpaRepository<Offer, Long> {
 
      Optional<Offer> findByIdOffer(int id);
-     List<Offer> findAllByLocalisation(String localisation);
-     List<Offer> findAllByStarDate(Date starDate);
-     List<Offer> findAllByDescrption(String description);
-    List<Offer> findAllByCollaborationRate(String rate);
+
 }

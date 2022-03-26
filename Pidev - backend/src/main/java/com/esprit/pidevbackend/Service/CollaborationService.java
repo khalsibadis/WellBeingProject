@@ -1,9 +1,11 @@
 package com.esprit.pidevbackend.Service;
 
 import com.esprit.pidevbackend.Domain.Collaboration;
+import com.esprit.pidevbackend.Domain.User;
 import com.esprit.pidevbackend.Repository.ICollaboration;
 import com.esprit.pidevbackend.Repository.IOffer;
 import com.esprit.pidevbackend.Repository.IPublicity;
+import com.esprit.pidevbackend.Repository.UserRepository;
 import com.esprit.pidevbackend.ServiceImp.ICollaborationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class CollaborationService implements ICollaborationService {
 	@Autowired
 	IPublicity PublicityRepo;
 
+	@Autowired
+	UserRepository userRepo;
+
 
 	@Override
 	public List<Collaboration> retrieveAllCollaborations() {
@@ -33,7 +38,9 @@ public class CollaborationService implements ICollaborationService {
 	}
 
 	@Override
-	public void addCollaboration(Collaboration c) {
+	public void addCollaboration(Collaboration c,long idUser) {
+		User user = userRepo.findById(idUser).get();
+		c.setUsers(user);
 		CollaborationRepo.save(c);
 	}
 

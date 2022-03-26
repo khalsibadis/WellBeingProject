@@ -12,11 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface IPublicity extends JpaRepository<Publicity, Long> {
-    Optional<Publicity> findByOffersIdOffer(Long id);
-    List<Publicity> findAllByOffersTitle(String title);
-    List<Publicity> findAllByOffersStarDate(Date starDate);
-    List<Publicity> findAllByOffersCollaborationRate(String rate);
-    List<Publicity> findAllByOffersDescrption(String description);
-    List<Publicity> findAllByOffers(String rate);
+
 
 }

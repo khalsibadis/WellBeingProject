@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 
 @Entity
-@ToString
+
 public class Publicity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,8 +30,8 @@ public class Publicity implements Serializable {
 	long idPublicity;
 	String title;
 	String description;
-	Date starDate;
-	Date endDate;
+	Date starDatePub;
+	Date endDatePub;
 	String picture;
 
 	@ManyToOne

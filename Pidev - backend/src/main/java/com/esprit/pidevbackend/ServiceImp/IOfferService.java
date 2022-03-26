@@ -9,7 +9,7 @@ import java.util.List;
 public interface IOfferService {
     List<Offer> retrieveAllOffers();
 
-    void addOffer(Offer o);
+    void addOffer(Offer o,long idCollaboration);
 
     void deleteOffer(Long id);
 
@@ -17,9 +17,9 @@ public interface IOfferService {
 
     Offer retrieveOffer(Long id);
 
-    void dateOffer(long idOffer, Date starDate, Date finDate);
+
     
-    float calculProm(long idOffer, float promotion);
+    float calculProm(long idOffer);
 
 
 }

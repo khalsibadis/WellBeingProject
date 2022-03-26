@@ -8,7 +8,7 @@ import java.util.List;
 public interface ICollaborationService {
     List<Collaboration> retrieveAllCollaborations();
 
-    void addCollaboration(Collaboration c);
+    void addCollaboration(Collaboration c,long idUser);
 
     void deleteCollaboration(Long id);
 

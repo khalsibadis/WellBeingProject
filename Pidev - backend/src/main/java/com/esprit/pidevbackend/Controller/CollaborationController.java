@@ -16,16 +16,15 @@ public class CollaborationController {
 
 
 	//http://localhost:8085/Collaboration/addCollaboration
-	@PostMapping("/addCollaboration")
-	@ResponseBody
-	public void addCollaboration(@RequestBody Collaboration c)
+	@PostMapping("/addCollaboration/{idUser}")
+	public void addCollaboration(@RequestBody Collaboration c,@PathVariable long idUser)
 	{
-		collaborationService.addCollaboration(c);
+		collaborationService.addCollaboration(c,idUser);
 	}
 
 	//http://localhost:8080/Collaboration/deleteCollaboration/id
 	@DeleteMapping("/Collaboration/deleteCollaboration/{id}")
-	@ResponseBody
+
 	public void deleteCollaboration(@PathVariable Long id){
 		collaborationService.deleteCollaboration(id);
 	}

@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 
 @Entity
-@ToString
+
 public class Collaboration implements Serializable {
 
 

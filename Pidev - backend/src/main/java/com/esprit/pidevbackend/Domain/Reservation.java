@@ -19,16 +19,21 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor 
 @AllArgsConstructor
-@ToString
+
 @Entity
 public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idReservation;
-    Date finDate;
-    Date endDate;
-    int NmPalce;
+    Date startDateRes;
+    Date endDateRes;
+    int nmPalce;
+
+    //stripe
+    String name;
+    String email;
+    String customerId;
 
     @ManyToOne
     Offer offersRes;
