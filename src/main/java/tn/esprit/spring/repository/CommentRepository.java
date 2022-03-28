@@ -1,10 +1,12 @@
 package tn.esprit.spring.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import tn.esprit.spring.entities.Comment;
+import tn.esprit.spring.entities.CommentFil;
 
-
-public interface CommentRepository extends CrudRepository<Comment, Integer> {
+@Repository
+public interface CommentRepository extends JpaRepository<CommentFil, Long> {
 
 }

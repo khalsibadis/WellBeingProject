@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entities.History;
 import tn.esprit.spring.repository.HistoryRepository;
-import tn.esprit.spring.repository.ThemeRepository;
+import tn.esprit.spring.repository.QuizRepository;
 
 @Slf4j
 @Service
@@ -18,29 +19,40 @@ public class HistoryServiceImpl implements IHistoryService {
 	HistoryRepository historyRepository;
 	
 	
+
+	@Override
+	public History addH(History his) {
+		return historyRepository.save(his);
+	}
+
+	@Override
+	public List<History> getHistorys() { 
+	
+		return historyRepository.findAll();
+	}
 	
 	@Override
-	public void addH(History his) {
-		historyRepository.save(his);
-		
+	public Optional<History> finHistoryById(Long idhi) {
+	
+		return historyRepository.findById(idhi);
+	}
+	
+
+	@Override
+	public void DeleteH(Long idhi) {
+		historyRepository.deleteById(idhi);
 	}
 
 	@Override
-	public List<History> getHistorys() {
-		return (List<History>) historyRepository.findAll();
+	public History UpdateH(History his) {
+		
+		return historyRepository.save(his);
 	}
 
-	@Override
-	public void DeleteH(int idh) {
-		historyRepository.deleteById(idh);
-		
-	}
+	
+	
+	
 
-	@Override
-	public void UpdateH(History his) {
-		historyRepository.save(his);
-		
-	}
 	
 
 }

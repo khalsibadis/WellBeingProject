@@ -5,14 +5,21 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
+
 
 @Entity
 public class User implements Serializable {
@@ -23,20 +30,22 @@ public class User implements Serializable {
 	private String nomUser;
 	private String prenomUser;
 	private String password;
+	private String email;
+    private Boolean isCaptain;
 	
-	public User(int idUser, String nomUser, String prenomUser, String password) {
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "team_id")
+	    private Team team;
+	 
+	
+	public User( String nomUser, String prenomUser, String password) {
 		super();
 		this.idUser = idUser;
 		this.nomUser = nomUser;
 		this.prenomUser = prenomUser;
 		this.password = password;
 	}
-	public User(String nomUser, String prenomUser, String password) {
-		super();
-		this.nomUser = nomUser;
-		this.prenomUser = prenomUser;
-		this.password = password;
-	}
+	
 	public User() {
 		
 	}
@@ -67,5 +76,6 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

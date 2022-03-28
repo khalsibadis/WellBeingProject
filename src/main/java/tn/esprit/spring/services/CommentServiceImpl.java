@@ -1,12 +1,13 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import tn.esprit.spring.entities.Comment;
+import tn.esprit.spring.entities.CommentFil;
 import tn.esprit.spring.repository.CommentRepository;
 import tn.esprit.spring.repository.HistoryRepository;
 
@@ -17,30 +18,35 @@ public class CommentServiceImpl implements ICommentService {
 	CommentRepository commentRepository;
 
 	@Override
-	public void addCom(Comment cm) {
-		commentRepository.save(cm);
+	public CommentFil addCm(CommentFil cm) {
 		
+		return commentRepository.save(cm);
 	}
 
 	@Override
-	public List<Comment> getcomments() {
-		
-		return (List<Comment>) commentRepository.findAll();
+	public List<CommentFil> getcomments() {
+	
+		return commentRepository.findAll();
 	}
 
 	@Override
-	public void DeleteCm(int idc) {
+	public Optional<CommentFil> finPubById(Long idc) {
+		
+		return commentRepository.findById(idc);
+	}
+
+	@Override
+	public void DeleteCm(Long idc) {
 		commentRepository.deleteById(idc);
 		
 	}
 
 	@Override
-	public void UpdateCm(int idc, Comment cm) {
-		 cm = commentRepository.findById(idc).orElse(null);
-	        commentRepository.save(cm);
+	public CommentFil UpdatPub(CommentFil cm) {
 		
+		return commentRepository.save(cm);
 	}
-	
+
 	
 
 }

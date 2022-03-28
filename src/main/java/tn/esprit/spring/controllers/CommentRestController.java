@@ -1,6 +1,7 @@
 package tn.esprit.spring.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.entities.Comment;
-import tn.esprit.spring.entities.Publication;
+import tn.esprit.spring.entities.CommentFil;
+import tn.esprit.spring.entities.PublicationFil;
 import tn.esprit.spring.services.ICommentService;
 import tn.esprit.spring.services.IHistoryService;
 
@@ -26,22 +27,26 @@ public class CommentRestController {
 	
 	
 	
-	@PostMapping("/addC")
-	public void addPubl (@RequestBody Comment cm) {
-		commentService.addCom(cm);
-	}
-	
-	@GetMapping("/getC")
-    public List<Comment> getcommentss(){
-		return commentService.getcomments();
-	}
-	@DeleteMapping("/Delete/{idC}")
-    public void DeleteL (@PathVariable("idC") int idc) {
-		commentService.DeleteCm(idc);
-	}
-	 @PutMapping("/UpdaP/{idC}")
-	    public void UpdateCmn(@PathVariable("idC") int idc,@RequestBody Comment  pb ) {
-	        commentService.UpdateCm(idc, pb);
+	 @PostMapping("/addCm")
+	 public CommentFil addCm (@RequestBody CommentFil cm) {
+		 return commentService.addCm(cm);
+		 
+	 }
+	 @GetMapping("/GetAllCm")
+	    public List<CommentFil> getcomments(){
+	    	return commentService.getcomments();
+	    }
+	    @GetMapping("/getCm/{idc}")
+	    public Optional<CommentFil> finPubById(@PathVariable ("idc") Long idc){
+	    	return commentService.finPubById(idc);
+	    }
+	    @DeleteMapping("/DelCm/{idc}")
+	    public void DeleteCm (@PathVariable("idc") Long idc) {
+	    	commentService.DeleteCm(idc);
+	    }
+	    @PutMapping("/UpdaCm")
+	    public CommentFil UpdatPub (@RequestBody CommentFil cm) {
+	    	return commentService.UpdatPub(cm);
 	    }
 	
 	

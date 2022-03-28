@@ -1,15 +1,19 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import tn.esprit.spring.entities.Publication;
-import tn.esprit.spring.entities.Theme;
+
+import tn.esprit.spring.entities.PublicationFil;
+
 
 public interface IPublicationService {
+
 	
-	 public void addPub(Publication pb);
-	    public List<Publication> getpubs();
-	    public void DeletePb (int idp);
-	    public void UpdatePb (int idp ,Publication pb);
+		public PublicationFil addPub (PublicationFil pb);
+	    public List<PublicationFil> getpubs();
+	    public Optional<PublicationFil> finPubById(Long idp);
+	    public void DeletePub (Long idp);
+	    public PublicationFil UpdatPub (PublicationFil pb);
 
 }

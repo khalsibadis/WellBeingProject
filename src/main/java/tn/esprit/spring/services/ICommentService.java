@@ -1,15 +1,19 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import tn.esprit.spring.entities.Comment;
-import tn.esprit.spring.entities.Publication;
+import tn.esprit.spring.entities.CommentFil;
+
 
 public interface ICommentService {
 	
-	    public void addCom(Comment cm);
-	    public List<Comment> getcomments();
-	    public void DeleteCm (int idc);
-	    public void UpdateCm (int idc ,Comment pb);
+	   
+	    
+		public CommentFil addCm (CommentFil cm);
+	    public List<CommentFil> getcomments();
+	    public Optional<CommentFil> finPubById(Long idc);
+	    public void DeleteCm (Long idc);
+	    public CommentFil UpdatPub (CommentFil cm);
 
 }
