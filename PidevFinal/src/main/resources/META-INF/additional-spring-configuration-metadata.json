@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "management.endpoints.health.show-details",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoints.health.show-details."
+    },
+    {
+      "name": "management.endpoints.health.show-details",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoints.health.show-details."
+    },
+    {
+      "name": "management.endpoints.health.show-details",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoints.health.show-details."
+    },
+    {
+      "name": "management.endpoints.health.show-details",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoints.health.show-details."
+    },
+    {
+      "name": "management.security.enabled",
+      "type": "java.lang.String",
+      "description": "Description for management.security.enabled."
+    }
+  ] }
